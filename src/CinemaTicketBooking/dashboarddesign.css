@@ -100,8 +100,8 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to ed
 
 }
 .insert-btn:hover{
-     -fx-background-color:#3c71c4;
-     
+    -fx-background-color:#3c71c4;
+
 }
 .update-btn{
     -fx-background-color:#337254;
@@ -112,8 +112,8 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to ed
 
 }
 .update-btn:hover{
-     -fx-background-color:#3ea105;
-     
+    -fx-background-color:#3ea105;
+
 }
 .delete-btn{
     -fx-background-color:#962934;
@@ -124,8 +124,8 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to ed
 
 }
 .delete-btn:hover{
-     -fx-background-color:#d33d63;
-     
+    -fx-background-color:#d33d63;
+
 }
 .clear-btn{
     -fx-background-color:#933b80;
@@ -136,27 +136,106 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to ed
 
 }
 .clear-btn:hover{
-     -fx-background-color:#c242be;
-     
+    -fx-background-color:#c242be;
+
 }
 
 .search{
-       -fx-background-color:#fff;
-          -fx-background-radius:0px 10px 0px 0px;
- -fx-border-color:#1e242e;
-  -fx-border-width:1px;
-      -fx-font-size:14px;
-      -fx-border-radius:0px 10px 0px 0px;
-      -fx-padding:0px 0px 0px 25px;
+    -fx-background-color:#fff;
+    -fx-background-radius:0px 10px 0px 0px;
+    -fx-border-color:#1e242e;
+    -fx-border-width:1px;
+    -fx-font-size:14px;
+    -fx-border-radius:0px 10px 0px 0px;
+    -fx-padding:0px 0px 0px 25px;
 }
 .search:focused{
-     -fx-border-color:#ae2d3c;
-     -fx-border-width:2px;
+    -fx-border-color:#ae2d3c;
+    -fx-border-width:2px;
 }
 
-.table-view .column-header-background{
-     -fx-background-color:linear-gradient(to top left,#1e242e,#ae2d3c);
-      -fx-background-radius:10px 0px 0px 0px;
-      -fx-background-insets:0 0 0 0;        
+.table-view {
+    -fx-background-color: #fff;
+    -fx-background-radius: 10px;
+    -fx-border-color: #ae2d3c;
+    -fx-border-radius: 10px;
+    -fx-fill: #fff;
+    -fx-padding:0px;
+
 }
-    
+
+.table-view .column-header-background {
+    -fx-background-color: linear-gradient(to top left, #1e242e, #ae2d3c);
+    -fx-background-insets: 0 0 0 0;
+    -fx-background-radius: 10px 10px 0px 0px;
+}
+
+.table-view .column-header, .table-view .filler {
+    -fx-background-color: transparent;
+    -fx-size: 50px;
+    -fx-fill: #fff;
+}
+.table-view .column-header .text{
+    -fx-fill:#fff;
+
+}
+.info-card{
+    -fx-border-color: #ae2d3c;
+    -fx-border-radius: 10px;
+
+}
+
+.lable-info{
+    -fx-border-color: #ae2d3c;
+    -fx-border-radius:0px 5px 0px 0px;
+    -fx-border-width:.8px;
+    -fx-padding:5px;
+    -fx-font-size:14px;
+}
+.spinner{
+    -fx-border-color: #000;
+    -fx-background-color: #fff;
+    -fx-border-width:.6px;
+
+}
+.buy-btn{
+    -fx-background-color: #2d7778;
+    -fx-text-fill:#fff;
+    -fx-background-radius: 8px;
+    -fx-cursor:hand;
+    -fx-font-size:14px;
+}
+.buy-btn:hover{
+    -fx-background-color: #3babb5;
+
+}
+.receipt-btn{
+    -fx-background-color: #937729;
+    -fx-text-fill:#fff;
+    -fx-background-radius: 8px;
+    -fx-font-size:14px;
+    -fx-cursor:hand;
+}
+.buy-btn:hover{
+    -fx-background-color: #d39948;
+
+}
+.combo-box{
+    -fx-background-color: #fff;
+    -fx-background-radius: 5px;
+       -fx-border-color: #1e242e;
+    -fx-border-radius:5px ;
+    -fx-border-width:.5px;
+}
+.combo-box:focused{
+    -fx-border-color: #ae2d3e;
+     -fx-border-width:1px;
+
+}
+.card-customer{
+    -fx-background-color: #fff;
+    -fx-background-radius: 5px;
+       -fx-border-color: #ae2d3c;
+    -fx-border-radius:5px ;
+    -fx-border-width:1px;
+}

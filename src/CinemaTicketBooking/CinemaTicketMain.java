@@ -17,33 +17,33 @@ import javafx.stage.StageStyle;
  * @author ASUS
  */
 public class CinemaTicketMain extends Application {
-    
-    private double x=0;
-    private double y=0;
-    
-    @Override
-    public void start(Stage stage) throws Exception{
-        Parent root = FXMLLoader.load(getClass().getResource("CinemaTicket.fxml"));
-        
-        Scene scene = new Scene(root);
-        
-        root.setOnMousePressed((MouseEvent event) ->{
-        x= event.getSceneX();
-        y= event.getSceneY();
 
-    });
-        
-        root.setOnMouseDragged((MouseEvent event) ->{
-          stage.setX(event.getScreenX() - x);
-          stage.setY(event.getScreenY() - y);
+    private double x = 0;
+    private double y = 0;
+
+    @Override
+    public void start(Stage stage) throws Exception {
+        Parent root = FXMLLoader.load(getClass().getResource("CinemaTicket.fxml"));
+
+        Scene scene = new Scene(root);
+
+        root.setOnMousePressed((MouseEvent event) -> {
+            x = event.getSceneX();
+            y = event.getSceneY();
 
         });
-        
+
+        root.setOnMouseDragged((MouseEvent event) -> {
+            stage.setX(event.getScreenX() - x);
+            stage.setY(event.getScreenY() - y);
+
+        });
+
         stage.initStyle(StageStyle.TRANSPARENT);
-        
+
         stage.setScene(scene);
         stage.show();
-   
+
     }
 
     /**
@@ -52,5 +52,5 @@ public class CinemaTicketMain extends Application {
     public static void main(String[] args) {
         launch(args);
     }
-    
+
 }

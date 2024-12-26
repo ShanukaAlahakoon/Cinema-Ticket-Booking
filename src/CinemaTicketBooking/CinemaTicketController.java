@@ -18,6 +18,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.input.MouseEvent;
+import javafx.stage.StageStyle;
 
 public class CinemaTicketController {
 
@@ -157,6 +159,9 @@ public class CinemaTicketController {
 
     }
 
+    private double x = 0;
+    private double y = 0;
+
     public void signin() {
         String sql = "SELECT * FROM admin WHERE username=? and password = ?";
 
@@ -195,6 +200,20 @@ public class CinemaTicketController {
 
                     Stage stage = new Stage();
                     Scene scene = new Scene(root);
+
+                    root.setOnMousePressed((MouseEvent event) -> {
+                        x = event.getSceneX();
+                        y = event.getSceneY();
+
+                    });
+
+                    root.setOnMouseDragged((MouseEvent event) -> {
+                        stage.setX(event.getScreenX() - x);
+                        stage.setY(event.getScreenY() - y);
+
+                    });
+
+                    stage.initStyle(StageStyle.TRANSPARENT);
 
                     stage.setScene(scene);
                     stage.show();

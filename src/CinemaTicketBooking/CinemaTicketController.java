@@ -187,6 +187,9 @@ public class CinemaTicketController {
 
             } else {
                 if (result.next()) {
+                    
+                    getData.username = signin_userName.getText();
+                    
                     alert = new Alert(AlertType.INFORMATION);
                     alert.setTitle("Impormation message");
                     alert.setHeaderText(null);

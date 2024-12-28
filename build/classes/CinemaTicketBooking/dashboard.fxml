@@ -164,7 +164,7 @@
                                 </AnchorPane>
                             </children>
                         </AnchorPane>
-                        <AnchorPane fx:id="addMovie_form" prefHeight="551.0" prefWidth="900.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                        <AnchorPane fx:id="addMovie_form" prefHeight="551.0" prefWidth="900.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                             <children>
                                 <AnchorPane fx:id="addMovie" layoutX="5.0" layoutY="17.0" prefHeight="518.0" prefWidth="251.0" styleClass="bg-white" stylesheets="@dashboarddesign.css">
                                     <children>
@@ -331,7 +331,7 @@
                                 </AnchorPane>
                             </children>
                         </AnchorPane>
-                        <AnchorPane fx:id="editScreening_form" prefHeight="551.0" prefWidth="900.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                        <AnchorPane fx:id="editScreening_form" prefHeight="551.0" prefWidth="900.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                             <children>
                                 <AnchorPane layoutX="8.0" layoutY="7.0" prefHeight="537.0" prefWidth="235.0" styleClass="bg-white" stylesheets="@dashboarddesign.css" AnchorPane.bottomAnchor="7.0" AnchorPane.leftAnchor="8.0" AnchorPane.topAnchor="7.0">
                                     <children>
@@ -350,7 +350,7 @@
                                                 <Font name="System Bold" size="18.0" />
                                             </font>
                                         </Label>
-                                        <ComboBox fx:id="editScreen_combo" layoutX="67.0" layoutY="269.0" prefWidth="150.0" promptText="Choose" styleClass="combo-box" stylesheets="@dashboarddesign.css" />
+                                        <ComboBox fx:id="editScreen_combo" layoutX="67.0" layoutY="269.0" onAction="#comboBox" prefWidth="150.0" promptText="Choose" styleClass="combo-box" stylesheets="@dashboarddesign.css" />
                                         <Label layoutX="12.0" layoutY="271.0" text="Current">
                                             <font>
                                                 <Font size="14.0" />

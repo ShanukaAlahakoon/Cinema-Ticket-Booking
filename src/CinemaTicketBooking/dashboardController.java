@@ -11,6 +11,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
@@ -230,16 +232,16 @@ public class dashboardController implements Initializable {
     private AnchorPane dashboard_form;
 
     @FXML
-    private TableColumn<?, ?> editScreen_col_current;
+    private TableColumn<movieData, String> editScreen_col_current;
 
     @FXML
-    private TableColumn<?, ?> editScreen_col_duration;
+    private TableColumn<movieData, String> editScreen_col_duration;
 
     @FXML
-    private TableColumn<?, ?> editScreen_col_genre;
+    private TableColumn<movieData, String> editScreen_col_genre;
 
     @FXML
-    private TableColumn<?, ?> editScreen_col_title;
+    private TableColumn<movieData, String> editScreen_col_title;
 
     @FXML
     private ComboBox<?> editScreen_combo;
@@ -254,7 +256,7 @@ public class dashboardController implements Initializable {
     private TextField editScreen_search;
 
     @FXML
-    private TableView<?> editScreen_table;
+    private TableView<movieData> editScreen_table;
 
     @FXML
     private Label editScreen_title;
@@ -293,6 +295,86 @@ public class dashboardController implements Initializable {
     private Statement statement;
     private ResultSet result;
 
+    
+    
+    private String[] currentList = {"showing","End showing"};
+    
+    public void comboBox(){
+        
+        List<String> listCurrent = new ArrayList<>();
+        
+        for(String data: currentList){
+            
+            listCurrent.add(data);
+        }
+        
+             ObservableList listC = FXCollections.observableArrayList(listCurrent) ;
+        editScreen_combo.setItems(listC);
+        
+        
+    }
+    
+    
+    
+    
+ public ObservableList<movieData> editScreeningList(){
+     
+     ObservableList<movieData> editSList = FXCollections.observableArrayList() ;
+     
+     String sql = "SELECT * FROM movie ";
+     
+     connect = database.connectdb();
+     
+     try{
+         
+         prepare = connect.prepareStatement(sql);
+         result = prepare.executeQuery();
+         
+         movieData movD;
+         
+         while(result.next()){
+             
+             movD = new movieData(result.getInt("id"),
+                  result.getString("movieTitle"),
+                        result.getString("genre"),
+                        result.getString("duration"),
+                        result.getString("image"),
+                        result.getDate("date"),
+             result.getString("current"));
+
+             editSList.add(movD);
+             
+         }
+         
+         
+         
+     }catch(Exception e){
+     e.printStackTrace();
+     
+ }
+   return editSList;  
+ }
+ 
+ 
+   private ObservableList<movieData> editScreeningL;
+public void showEditScreening(){
+    
+    editScreeningL = editScreeningList();
+    
+    editScreen_col_title.setCellValueFactory(new PropertyValueFactory<>("title"));
+    editScreen_col_genre.setCellValueFactory(new PropertyValueFactory<>("genre"));
+    editScreen_col_duration.setCellValueFactory(new PropertyValueFactory<>("duration"));
+    editScreen_col_current.setCellValueFactory(new PropertyValueFactory<>("current"));
+    
+    editScreen_table.setItems(editScreeningL);
+
+    
+    
+}
+
+
+ 
+    
     public void searchAddMovie() {
 
         FilteredList<movieData> filter = new FilteredList<>(listAddMovies, e -> true);
@@ -577,7 +659,8 @@ public class dashboardController implements Initializable {
                         result.getString("genre"),
                         result.getString("duration"),
                         result.getString("image"),
-                        result.getDate("date"));
+                        result.getDate("date"),
+                result.getString("current"));
 
                 listData.add(movD);
 
@@ -754,6 +837,10 @@ public class dashboardController implements Initializable {
         displayUsername();
 
         showAddMoviesList();
+        
+        showEditScreening();
+        
+        comboBox();
 
     }
 

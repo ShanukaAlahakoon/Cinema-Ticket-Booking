@@ -204,7 +204,7 @@
                                 </AnchorPane>
                             </children>
                         </AnchorPane>
-                        <AnchorPane fx:id="availableMovie_form" prefHeight="551.0" prefWidth="900.0" visible="false">
+                        <AnchorPane fx:id="availableMovie_form" prefHeight="551.0" prefWidth="900.0">
                             <children>
                                 <AnchorPane layoutX="14.0" layoutY="14.0" prefHeight="165.0" prefWidth="886.0" styleClass="bg-white" stylesheets="@dashboarddesign.css" AnchorPane.leftAnchor="7.0" AnchorPane.rightAnchor="7.0" AnchorPane.topAnchor="7.0">
                                     <children>
@@ -240,14 +240,14 @@
                                                         <Font name="Microsoft Sans Serif" size="14.0" />
                                                     </font>
                                                 </Label>
-                                                <Button fx:id="availableMovie_selectBtn" layoutX="80.0" layoutY="131.0" mnemonicParsing="false" styleClass="insert-btn" stylesheets="@dashboarddesign.css" text="Select Movie">
+                                                <Button fx:id="availableMovie_selectBtn" layoutX="80.0" layoutY="131.0" mnemonicParsing="false" onAction="#selectmovie" styleClass="insert-btn" stylesheets="@dashboarddesign.css" text="Select Movie">
                                                     <font>
                                                         <Font name="Microsoft Sans Serif" size="14.0" />
                                                     </font>
                                                 </Button>
                                             </children>
                                         </AnchorPane>
-                                        <TableView fx:id="availableMovie_Table" layoutX="249.0" prefHeight="165.0" prefWidth="640.0" AnchorPane.bottomAnchor="2.0" AnchorPane.rightAnchor="2.0" AnchorPane.topAnchor="2.0">
+                                        <TableView fx:id="availableMovie_Table" layoutX="249.0" onMouseClicked="#selectAvailableMovie" prefHeight="165.0" prefWidth="640.0" AnchorPane.bottomAnchor="2.0" AnchorPane.rightAnchor="2.0" AnchorPane.topAnchor="2.0">
                                             <columns>
                                                 <TableColumn fx:id="availableMovie_Col_title" prefWidth="223.0" text="Movie Title" />
                                                 <TableColumn fx:id="availableMovie_Col_genre" prefWidth="172.0" text="Genre" />
@@ -331,7 +331,7 @@
                                 </AnchorPane>
                             </children>
                         </AnchorPane>
-                        <AnchorPane fx:id="editScreening_form" prefHeight="551.0" prefWidth="900.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                        <AnchorPane fx:id="editScreening_form" prefHeight="551.0" prefWidth="900.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                             <children>
                                 <AnchorPane layoutX="8.0" layoutY="7.0" prefHeight="537.0" prefWidth="235.0" styleClass="bg-white" stylesheets="@dashboarddesign.css" AnchorPane.bottomAnchor="7.0" AnchorPane.leftAnchor="8.0" AnchorPane.topAnchor="7.0">
                                     <children>
@@ -356,15 +356,15 @@
                                                 <Font size="14.0" />
                                             </font>
                                         </Label>
-                                        <Button fx:id="editScreen_updatebtn" layoutX="22.0" layoutY="334.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="81.0" styleClass="update-btn" stylesheets="@dashboarddesign.css" text="Update" />
-                                        <Button fx:id="editScreen_deletebtn" layoutX="135.0" layoutY="334.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="81.0" styleClass="delete-btn" stylesheets="@dashboarddesign.css" text="Delete" />
+                                        <Button fx:id="editScreen_updatebtn" layoutX="22.0" layoutY="334.0" mnemonicParsing="false" onAction="#updateEditScreeninig" prefHeight="37.0" prefWidth="81.0" styleClass="update-btn" stylesheets="@dashboarddesign.css" text="Update" />
+                                        <Button fx:id="editScreen_deletebtn" layoutX="135.0" layoutY="334.0" mnemonicParsing="false" onAction="#clearEditScreening" prefHeight="37.0" prefWidth="81.0" styleClass="clear-btn" stylesheets="@dashboarddesign.css" text="Clear" />
                                     </children>
                                 </AnchorPane>
                                 <AnchorPane layoutX="259.0" layoutY="10.0" prefHeight="531.0" prefWidth="629.0" styleClass="bg-white" stylesheets="@dashboarddesign.css">
                                     <children>
-                                        <TextField fx:id="editScreen_search" layoutX="14.0" layoutY="25.0" prefHeight="25.0" prefWidth="200.0" promptText="Search" styleClass="search" stylesheets="@dashboarddesign.css" />
+                                        <TextField fx:id="editScreen_search" layoutX="14.0" layoutY="25.0" onKeyTyped="#searchEditScreening" prefHeight="25.0" prefWidth="200.0" promptText="Search" styleClass="search" stylesheets="@dashboarddesign.css" />
                                         <FontAwesomeIcon glyphName="SEARCH" layoutX="22.0" layoutY="42.0" size="1.2em" />
-                                        <TableView fx:id="editScreen_table" layoutX="14.0" layoutY="66.0" prefHeight="461.0" prefWidth="603.0">
+                                        <TableView fx:id="editScreen_table" layoutX="14.0" layoutY="66.0" onMouseClicked="#selectEditScreening" prefHeight="461.0" prefWidth="603.0">
                                             <columns>
                                                 <TableColumn fx:id="editScreen_col_title" prefWidth="231.0" text="Movie Title" />
                                                 <TableColumn fx:id="editScreen_col_genre" prefWidth="122.0" text="Genre" />

@@ -106,13 +106,13 @@ public class dashboardController implements Initializable {
     private Button addmovie_btn;
 
     @FXML
-    private TableColumn<?, ?> availableMovie_Col_date;
+    private TableColumn<movieData, String> availableMovie_Col_date;
 
     @FXML
-    private TableColumn<?, ?> availableMovie_Col_genre;
+    private TableColumn<movieData, String> availableMovie_Col_genre;
 
     @FXML
-    private TableColumn<?, ?> availableMovie_Col_title;
+    private TableColumn<movieData, String> availableMovie_Col_title;
 
     @FXML
     private Spinner<?> availableMovie_Spclass;
@@ -121,7 +121,7 @@ public class dashboardController implements Initializable {
     private Label availableMovie_Spclass_price;
 
     @FXML
-    private TableView<?> availableMovie_Table;
+    private TableView<movieData> availableMovie_Table;
 
     @FXML
     private Button availableMovie_btn;
@@ -297,84 +297,265 @@ public class dashboardController implements Initializable {
 
     
     
-    private String[] currentList = {"showing","End showing"};
-    
-    public void comboBox(){
+    //Available movie page..
+       public ObservableList<movieData> availableMovieList(){
         
-        List<String> listCurrent = new ArrayList<>();
+            ObservableList<movieData> listAvMovies = FXCollections.observableArrayList();
+           
+             String sql = "SELECT * FROM movie WHERE current = 'showing' ";
+
+        connect = database.connectdb();
         
-        for(String data: currentList){
-            
-            listCurrent.add(data);
-        }
-        
-             ObservableList listC = FXCollections.observableArrayList(listCurrent) ;
-        editScreen_combo.setItems(listC);
-        
-        
-    }
-    
-    
-    
-    
- public ObservableList<movieData> editScreeningList(){
-     
-     ObservableList<movieData> editSList = FXCollections.observableArrayList() ;
-     
-     String sql = "SELECT * FROM movie ";
-     
-     connect = database.connectdb();
-     
-     try{
-         
-         prepare = connect.prepareStatement(sql);
-         result = prepare.executeQuery();
-         
-         movieData movD;
-         
-         while(result.next()){
-             
-             movD = new movieData(result.getInt("id"),
-                  result.getString("movieTitle"),
+                try {
+
+            prepare = connect.prepareStatement(sql);
+            result = prepare.executeQuery();
+
+            movieData movD;
+
+            while (result.next()) {
+
+                movD = new movieData(result.getInt("id"),
+                        result.getString("movieTitle"),
                         result.getString("genre"),
                         result.getString("duration"),
                         result.getString("image"),
                         result.getDate("date"),
-             result.getString("current"));
+                        result.getString("current"));
 
-             editSList.add(movD);
-             
-         }
+                listAvMovies.add(movD);
+
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+
+        }
+        return listAvMovies;
+        
+       }
+    
+        private ObservableList<movieData> availableMovieList;
+        
+         public void showAvailableMovie() {
+
+        availableMovieList = availableMovieList();
+
+      availableMovie_Col_title.setCellValueFactory(new PropertyValueFactory<>("title"));
+        availableMovie_Col_genre.setCellValueFactory(new PropertyValueFactory<>("genre"));
+        availableMovie_Col_date.setCellValueFactory(new PropertyValueFactory<>("date"));
+
+        availableMovie_Table.setItems(availableMovieList);
+
+    }
+
+    public void selectAvailableMovie(){
+        
+                movieData movD = availableMovie_Table.getSelectionModel().getSelectedItem();
+        int num = availableMovie_Table.getSelectionModel().getFocusedIndex();
+
+        if ((num - 1) < -1) {
+            return;
+        }
+
+        availableMovie_title.setText(movD.getTitle());
+        availableMovie_genre.setText(movD.getGenre());
+        availableMovie_date.setText(String.valueOf(movD.getDate()));
+        
+        getData.path = movD.getImage();
+        getData.title = movD.getTitle();
+    }
          
+      public void selectmovie(){
+          
+          String uri ="file:"+getData.path;
+          
+          image = new Image(uri,121, 187, false, true);
+          availableMovie_image.setImage(image);
+          
+          availableMovie_titleName.setText(getData.title);
+          
+          
+          availableMovie_title.setText("");
+          availableMovie_genre.setText("");
+          availableMovie_date.setText("");
+          
+      }   
          
-         
-     }catch(Exception e){
-     e.printStackTrace();
-     
- }
-   return editSList;  
- }
- 
- 
-   private ObservableList<movieData> editScreeningL;
-public void showEditScreening(){
-    
-    editScreeningL = editScreeningList();
-    
-    editScreen_col_title.setCellValueFactory(new PropertyValueFactory<>("title"));
-    editScreen_col_genre.setCellValueFactory(new PropertyValueFactory<>("genre"));
-    editScreen_col_duration.setCellValueFactory(new PropertyValueFactory<>("duration"));
-    editScreen_col_current.setCellValueFactory(new PropertyValueFactory<>("current"));
-    
-    editScreen_table.setItems(editScreeningL);
 
-    
-    
-}
+    //Edit Screening page....
+    private String[] currentList = {"showing", "End showing"};
 
+    public void comboBox() {
 
- 
-    
+        List<String> listCurrent = new ArrayList<>();
+
+        for (String data : currentList) {
+
+            listCurrent.add(data);
+        }
+
+        ObservableList listC = FXCollections.observableArrayList(listCurrent);
+        editScreen_combo.setItems(listC);
+
+    }
+
+    public void updateEditScreeninig() {
+
+        String sql = "UPDATE movie SET current = '" + editScreen_combo.getSelectionModel().getSelectedItem()
+                + "'WHERE movieTitle = '" + editScreen_title.getText() + "'";
+
+        connect = database.connectdb();
+
+        try {
+
+            statement = connect.createStatement();
+
+            Alert alert;
+
+            if (editScreen_title.getText().isEmpty() || editScreen_image.getImage() == null
+                    || editScreen_combo.getSelectionModel().isEmpty()) {
+
+                alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error Message");
+                alert.setHeaderText(null);
+                alert.setContentText("Please select the movie first");
+                alert.showAndWait();
+            } else {
+
+                statement.executeUpdate(sql);
+                alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Information Message");
+                alert.setHeaderText(null);
+                alert.setContentText("Successfully update!");
+                alert.showAndWait();
+
+                showEditScreening();
+
+                clearEditScreening();
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public void clearEditScreening() {
+
+        editScreen_title.setText("");
+
+        editScreen_image.setImage(null);
+        // editScreen_combo.setSelectionModel(null);
+
+    }
+
+    public void searchEditScreening() {
+        FilteredList<movieData> filter = new FilteredList<>(editScreeningL, e -> true);
+
+        editScreen_search.textProperty().addListener((observable, oldValue, newValue) -> {
+
+            filter.setPredicate(predicateMovieData -> {
+
+                if (newValue.isEmpty() || newValue == null) {
+                    return true;
+                }
+
+                String keySearch = newValue.toLowerCase();
+                if (predicateMovieData.getTitle().toLowerCase().contains(keySearch)) {
+                    return true;
+
+                } else if (predicateMovieData.getGenre().toLowerCase().contains(keySearch)) {
+                    return true;
+
+                } else if (predicateMovieData.getDuration().toLowerCase().contains(keySearch)) {
+                    return true;
+
+                } else if (predicateMovieData.getCurrent().toString().contains(keySearch)) {
+                    return true;
+
+                }
+
+                return false;
+
+            });
+
+            SortedList<movieData> sortData = new SortedList<>(filter);
+            sortData.comparatorProperty().bind(editScreen_table.comparatorProperty());
+
+            editScreen_table.setItems(sortData);
+        });
+
+    }
+
+    public void selectEditScreening() {
+        movieData movD = editScreen_table.getSelectionModel().getSelectedItem();
+        int num = editScreen_table.getSelectionModel().getFocusedIndex();
+
+        if ((num - 1) < -1) {
+            return;
+        }
+
+        String uri = "file:" + movD.getImage();
+        image = new Image(uri, 131, 157, false, true);
+        editScreen_image.setImage(image);
+
+        editScreen_title.setText(movD.getTitle());
+
+    }
+
+    public ObservableList<movieData> editScreeningList() {
+
+        ObservableList<movieData> editSList = FXCollections.observableArrayList();
+
+        String sql = "SELECT * FROM movie ";
+
+        connect = database.connectdb();
+
+        try {
+
+            prepare = connect.prepareStatement(sql);
+            result = prepare.executeQuery();
+
+            movieData movD;
+
+            while (result.next()) {
+
+                movD = new movieData(result.getInt("id"),
+                        result.getString("movieTitle"),
+                        result.getString("genre"),
+                        result.getString("duration"),
+                        result.getString("image"),
+                        result.getDate("date"),
+                        result.getString("current"));
+
+                editSList.add(movD);
+
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+
+        }
+        return editSList;
+    }
+
+    private ObservableList<movieData> editScreeningL;
+
+    public void showEditScreening() {
+
+        editScreeningL = editScreeningList();
+
+        editScreen_col_title.setCellValueFactory(new PropertyValueFactory<>("title"));
+        editScreen_col_genre.setCellValueFactory(new PropertyValueFactory<>("genre"));
+        editScreen_col_duration.setCellValueFactory(new PropertyValueFactory<>("duration"));
+        editScreen_col_current.setCellValueFactory(new PropertyValueFactory<>("current"));
+
+        editScreen_table.setItems(editScreeningL);
+
+    }
+
+    //Add movie page....
     public void searchAddMovie() {
 
         FilteredList<movieData> filter = new FilteredList<>(listAddMovies, e -> true);
@@ -660,7 +841,7 @@ public void showEditScreening(){
                         result.getString("duration"),
                         result.getString("image"),
                         result.getDate("date"),
-                result.getString("current"));
+                        result.getString("current"));
 
                 listData.add(movD);
 
@@ -837,10 +1018,14 @@ public void showEditScreening(){
         displayUsername();
 
         showAddMoviesList();
-        
+
         showEditScreening();
-        
+
         comboBox();
+        
+        
+        //to show available movie table
+        showAvailableMovie();
 
     }
 

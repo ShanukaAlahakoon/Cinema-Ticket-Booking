@@ -225,7 +225,7 @@
                                                         <Font name="Microsoft Sans Serif" size="14.0" />
                                                     </font>
                                                 </Label>
-                                                <Label fx:id="availableMovie_genre" layoutX="89.0" layoutY="48.0" prefHeight="32.0" prefWidth="135.0" styleClass="lable-info" stylesheets="@dashboarddesign.css" text="Movie Title" AnchorPane.topAnchor="47.0">
+                                                <Label fx:id="availableMovie_genre" layoutX="89.0" layoutY="48.0" prefHeight="32.0" prefWidth="135.0" styleClass="lable-info" stylesheets="@dashboarddesign.css" text="Genre" AnchorPane.topAnchor="47.0">
                                                     <font>
                                                         <Font name="Microsoft Sans Serif" size="14.0" />
                                                     </font>
@@ -235,7 +235,7 @@
                                                         <Font name="Microsoft Sans Serif" size="14.0" />
                                                     </font>
                                                 </Label>
-                                                <Label fx:id="availableMovie_date" layoutX="89.0" layoutY="88.0" prefHeight="32.0" prefWidth="134.0" styleClass="lable-info" stylesheets="@dashboarddesign.css" text="Movie Title">
+                                                <Label fx:id="availableMovie_date" layoutX="89.0" layoutY="88.0" prefHeight="32.0" prefWidth="134.0" styleClass="lable-info" stylesheets="@dashboarddesign.css" text="Date">
                                                     <font>
                                                         <Font name="Microsoft Sans Serif" size="14.0" />
                                                     </font>
@@ -287,7 +287,7 @@
                                                 <Font name="System Bold" size="14.0" />
                                             </font>
                                         </Label>
-                                        <Label layoutX="517.0" layoutY="88.0" text="Price">
+                                        <Label layoutX="519.0" layoutY="88.0" text="Price">
                                             <font>
                                                 <Font name="System Bold" size="14.0" />
                                             </font>
@@ -297,32 +297,32 @@
                                                 <Font size="14.0" />
                                             </font>
                                         </Label>
-                                        <Label layoutX="315.0" layoutY="167.0" text="Spacial Class">
+                                        <Label layoutX="313.0" layoutY="167.0" text="Normal Class">
                                             <font>
                                                 <Font size="14.0" />
                                             </font>
                                         </Label>
-                                        <Spinner fx:id="availableMovie_Spclass" layoutX="401.0" layoutY="120.0" prefHeight="25.0" prefWidth="75.0" stylesheets="@dashboarddesign.css" AnchorPane.leftAnchor="401.0" />
-                                        <Spinner fx:id="availableMovie_normalclass" layoutX="400.0" layoutY="165.0" prefHeight="25.0" prefWidth="75.0" stylesheets="@dashboarddesign.css" AnchorPane.leftAnchor="401.0" />
-                                        <Label fx:id="availableMovie_Spclass_price" layoutX="516.0" layoutY="124.0" text="\$0.0">
+                                        <Spinner fx:id="availableMovie_Spclass" layoutX="401.0" layoutY="120.0" onMouseClicked="#getSpinnerValue" prefHeight="25.0" prefWidth="75.0" stylesheets="@dashboarddesign.css" AnchorPane.leftAnchor="401.0" />
+                                        <Spinner fx:id="availableMovie_normalclass" layoutX="400.0" layoutY="165.0" onMouseClicked="#getSpinnerValue" prefHeight="25.0" prefWidth="75.0" stylesheets="@dashboarddesign.css" AnchorPane.leftAnchor="401.0" />
+                                        <Label fx:id="availableMovie_Spclass_price" layoutX="516.0" layoutY="124.0" text="Rs.0.0">
                                             <font>
                                                 <Font name="Microsoft Sans Serif" size="14.0" />
                                             </font>
                                         </Label>
-                                        <Label fx:id="availableMovie_normalclass_price" layoutX="516.0" layoutY="170.0" text="\$0.0">
+                                        <Label fx:id="availableMovie_normalclass_price" layoutX="516.0" layoutY="170.0" text="Rs.0.0">
                                             <font>
                                                 <Font name="Microsoft Sans Serif" size="14.0" />
                                             </font>
                                         </Label>
-                                        <Button fx:id="availableMovie_clearbtn" layoutX="315.0" layoutY="245.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="79.0" styleClass="clear-btn" stylesheets="@dashboarddesign.css" text="Clear" />
+                                        <Button fx:id="availableMovie_clearbtn" layoutX="315.0" layoutY="245.0" mnemonicParsing="false" onAction="#clearPurchaseTicketInfo" prefHeight="32.0" prefWidth="79.0" styleClass="clear-btn" stylesheets="@dashboarddesign.css" text="Clear" />
                                         <Button fx:id="availableMovie_receiptbtn" layoutX="550.0" layoutY="245.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="79.0" styleClass="receipt-btn" stylesheets="@dashboarddesign.css" text="Receipt" />
-                                        <Button fx:id="availableMovie_buybtn" layoutX="671.0" layoutY="245.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="79.0" styleClass="buy-btn" stylesheets="@dashboarddesign.css" text="Buy" />
+                                        <Button fx:id="availableMovie_buybtn" layoutX="671.0" layoutY="245.0" mnemonicParsing="false" onAction="#buy" prefHeight="32.0" prefWidth="79.0" styleClass="buy-btn" stylesheets="@dashboarddesign.css" text="Buy" />
                                         <Label layoutX="643.0" layoutY="205.0" text="Total:">
                                             <font>
                                                 <Font name="Microsoft Sans Serif" size="18.0" />
                                             </font>
                                         </Label>
-                                        <Label fx:id="availableMovie_total" layoutX="702.0" layoutY="205.0" text="\$0.0">
+                                        <Label fx:id="availableMovie_total" layoutX="702.0" layoutY="205.0" text="Rs.0.0">
                                             <font>
                                                 <Font name="Microsoft Sans Serif" size="18.0" />
                                             </font>
